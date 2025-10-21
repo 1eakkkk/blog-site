@@ -124,5 +124,77 @@ function escapeHtml(s){
   return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-bindAuth();
+function bindAuth(){
+  const reg = $("#btnRegister"), login=$("#btnLogin"), logout=$("#btnLogout");
+  const u=$("#username"), p=$("#password"), msg=$("#authMsg");
+  setUserBox(USERNAME);
+
+  console.log("[auth] app.js loaded, elements:", {reg: !!reg, login: !!login, logout: !!logout, u: !!u, p: !!p});
+
+  if (reg) reg.addEventListener("click", async (e) => {
+    e.preventDefault();
+    try {
+      console.log("[auth] register clicked");
+      const r = await fetch(`${API}/api/register`, {
+        method:"POST",
+        headers:{ "content-type":"application/json" },
+        body: JSON.stringify({ username: u.value.trim(), password: p.value })
+      });
+      const j = await r.json();
+      console.log("[auth] register resp:", j);
+      msg.textContent = j.ok ? "注册成功，请登录。" : `注册失败：${j.error||r.status}`;
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "注册请求失败（看 Console 日志）";
+    }
+  });
+
+  if (login) login.addEventListener("click", async (e) => {
+    e.preventDefault();
+    try {
+      console.log("[auth] login clicked");
+      const r = await fetch(`${API}/api/login`, {
+        method:"POST",
+        headers:{ "content-type":"application/json" },
+        credentials:"include",
+        body: JSON.stringify({ username: u.value.trim(), password: p.value })
+      });
+      const j = await r.json();
+      console.log("[auth] login resp:", j);
+      if (j.ok) {
+        USERNAME = j.username;
+        localStorage.setItem("username", USERNAME);
+        setUserBox(USERNAME);
+        msg.textContent = "登录成功。";
+      } else {
+        msg.textContent = `登录失败：${j.error||r.status}`;
+      }
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "登录请求失败（看 Console 日志）";
+    }
+  });
+
+  if (logout) logout.addEventListener("click", async (e) => {
+    e.preventDefault();
+    try {
+      console.log("[auth] logout clicked");
+      const r = await fetch(`${API}/api/logout`, { method:"POST", credentials:"include" });
+      const j = await r.json();
+      console.log("[auth] logout resp:", j);
+      if (j.ok) {
+        USERNAME = "";
+        localStorage.removeItem("username");
+        setUserBox("");
+        msg.textContent = "已退出。";
+      } else {
+        msg.textContent = `退出失败：${j.error||r.status}`;
+      }
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "退出请求失败（看 Console 日志）";
+    }
+  });
+}
+
 bindComments();
