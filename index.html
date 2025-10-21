@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>1eak.cool / Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">1eak<span class="dot">·</span>cool</div>
+    <nav class="nav">
+      <a href="./index.html">首页</a>
+      <a href="./post.html?slug=hello-world">示例文章</a>
+      <span id="userbox"></span>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section>
+      <h1>极简 · 黑白 · 科技</h1>
+      <p>这是你的 GitHub Pages 前端，评论与登录由 <code>api.1eak.cool</code> 提供。</p>
+    </section>
+
+    <section class="auth">
+      <h2>登录 / 注册</h2>
+      <div class="grid">
+        <input id="username" placeholder="用户名（3-32）" autocomplete="username">
+        <input id="password" placeholder="密码（≥6）" type="password" autocomplete="current-password">
+        <button id="btnRegister">注册</button>
+        <button id="btnLogin">登录</button>
+        <button id="btnLogout">退出登录</button>
+      </div>
+      <div id="authMsg" class="msg"></div>
+    </section>
+
+    <section>
+      <h2>文章示例</h2>
+      <ul>
+        <li><a href="./post.html?slug=hello-world">Hello, world</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> 1eak.cool</footer>
+  <script src="./app.js"></script>
+</body>
+</html>
