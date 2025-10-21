@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>文章 - 1eak.cool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./styles.css" rel="stylesheet">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">1eak<span class="dot">·</span>cool</div>
+    <nav class="nav">
+      <a href="./index.html">首页</a>
+      <span id="userbox"></span>
+    </nav>
+  </header>
+
+  <main class="container">
+    <article>
+      <h1 id="title"></h1>
+      <p id="meta" class="muted"></p>
+      <div id="content" class="content">
+        <p>这是静态内容示例。你可以把真正的文章写在这里（Markdown 预渲染成 HTML 后放入）。</p>
+      </div>
+    </article>
+
+    <section class="comments">
+      <h2>评论</h2>
+      <div id="commentList" class="comment-list"></div>
+
+      <div class="comment-form">
+        <textarea id="commentInput" placeholder="写下你的看法…（Enter换行，Ctrl+Enter发送）" rows="4"></textarea>
+        <button id="btnSend">发布评论</button>
+        <div id="cmtMsg" class="msg"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> 1eak.cool</footer>
+  <script src="./app.js"></script>
+</body>
+</html>
